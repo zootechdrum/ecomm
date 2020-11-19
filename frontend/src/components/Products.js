@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-import products from '../products'
-import rating from '../rating'
+
+import Rating from './Rating'
 
 const Products = ({ product }) => {
   return (
@@ -11,7 +11,7 @@ const Products = ({ product }) => {
       </a>
 
       <Card.Body>
-        <a href={`/products$=${products._id}`}>
+        <a href={`/products$=${product._id}`}>
           <Card.Title as="div">
             <strong>{product.name}</strong>
           </Card.Title>
