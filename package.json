@@ -1,0 +1,25 @@
+{
+  "name": "ecomm-site",
+  "version": "1.0.0",
+  "description": "e-comm site",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zootechdrum/ecomm.git"
+  },
+  "author": "Cesar Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zootechdrum/ecomm/issues"
+  },
+  "homepage": "https://github.com/zootechdrum/ecomm#readme"
+}
