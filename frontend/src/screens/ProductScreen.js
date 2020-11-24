@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import product from '../products'
+import axios from 'axios'
 
 function ProductScreen({ match }) {
-  const products = product.find((p) => p._id === match.params.id)
+  const [product, setProduct] = useState({})
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`)
+
+      setProduct(data)
+    }
+
+    fetchProduct()
+  }, [match])
   return (
     <>
       <Link className="btn btn-dark my-3" to="/">
@@ -13,22 +23,20 @@ function ProductScreen({ match }) {
       </Link>
       <Row>
         <Col md={6}>
-          <Image src={products.image} alt={products.name} fluid />
+          <Image src={product.image} alt={product.name} fluid />
         </Col>
 
         <Col md={3}>
           <ListGroup variant="flush">
-            <h2>{products.name}</h2>
+            <h2>{product.name}</h2>
             <ListGroup.Item>
               <Rating
-                value={products.rating}
-                text={`${products.numReviews} reviews`}
+                value={product.rating}
+                text={`${product.numReviews} reviews`}
               />
             </ListGroup.Item>
-            <ListGroup.Item>Price: ${products.price}</ListGroup.Item>
-            <ListGroup.Item>
-              Description: ${products.description}
-            </ListGroup.Item>
+            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+            <ListGroup.Item>Description: ${product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
 
@@ -39,7 +47,7 @@ function ProductScreen({ match }) {
                 <Row>
                   <Col>Price</Col>
                   <Col>
-                    <strong>{products.price}</strong>
+                    <strong>{product.price}</strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -49,7 +57,7 @@ function ProductScreen({ match }) {
                   <Col>Status:</Col>
                   <Col>
                     <strong>
-                      {products.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                      {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                     </strong>
                   </Col>
                 </Row>
