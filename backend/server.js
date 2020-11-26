@@ -10,8 +10,7 @@ const app = express()
 app.get('/', (req, res) => {
   res.send('Api is running')
 })
-    
-cccsjdhfksjd
+
 app.get('/api/products', (req, res) => {
   res.json(products)
 })
