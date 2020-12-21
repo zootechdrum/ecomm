@@ -8,7 +8,7 @@ import Product from '../models/productModel.js'
 // @route Get /api/products
 // @access Public
 const app = express()
-app.get('/', asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
     const products = await Product.find({})
 
     res.json(products)
@@ -17,14 +17,16 @@ app.get('/', asyncHandler(async (req, res) => {
 // @desc Fetch single Product
 // @route Get /ap/id
 // @access Public
- app.get('/:id', asyncHandler(async (req, res) => {
+
+ router.get('/:id', asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
     if(product) {
         res.json(product)
 
     }else {
-        res.status(404).json({message: 'Product not found'})
+      res.status(404)
+       throw new Error('Item item not found')
     }
     console.log(product)
     res.json(product)
